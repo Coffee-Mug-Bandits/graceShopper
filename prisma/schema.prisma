@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id Int @id @default(autoincrement())
+  username String @db.VarChar(255)
+  password String @db.VarChar(255)
+  email String
+  location String
+  isAdmin Boolean @default(false)
+  orders Order[]
+}
+
+model Order {
+  id Int @id @default(autoincrement())
+  buyer Users @relation(fields: [user_id], references: [id])
+  user_id Int
+  totalAmount Decimal
+  orderStatus Status @default(Placed)
+  is_cart Boolean @default(false)
+  order_products Order_products[]
+}
+
+model Product {
+  id Int @id @default(autoincrement())
+  seller Seller @relation(fields: [seller_id], references: [id])
+  seller_id Int
+  name String @db.VarChar(255)
+  price Decimal
+  stock_qty Int
+  description String
+  rating Int
+  order_products Order_products[]
+}
+
+model Seller {
+  id Int @id @default(autoincrement())
+  name String
+  messages String
+  rating Int
+  products Product[]
+}
+
+model Order_products {
+ id Int @id @default(autoincrement())
+ order_id Int
+ product_id Int
+ qty Int
+ orders Order @relation(fields: [order_id], references: [id])
+ products Product @relation(fields: [product_id], references: [id])
+}
+
+
+
+
+
+
+
+enum Status {
+  Delivered
+  Shipped
+  Processing
+  Placed
+}
