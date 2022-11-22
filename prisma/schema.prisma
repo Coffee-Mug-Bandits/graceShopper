@@ -24,7 +24,7 @@ model Order {
   id Int @id @default(autoincrement())
   buyer Users @relation(fields: [user_id], references: [id])
   user_id Int
-  totalAmount Decimal
+  totalAmount Int 
   orderStatus Status @default(Placed)
   is_cart Boolean @default(false)
   order_products Order_products[]
@@ -35,7 +35,7 @@ model Product {
   seller Seller @relation(fields: [seller_id], references: [id])
   seller_id Int
   name String @db.VarChar(255)
-  price Decimal
+  price Int
   stock_qty Int
   description String
   rating Int
