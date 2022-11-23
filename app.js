@@ -18,7 +18,7 @@ app.get("/health", (req, res) => {
 
 //api routes
 
-// app.use("/routes", require("./routes"));
+app.use("/routes", require("./routes"));
 
 // app.use((req, res, next) => {
 //     res.sendFile(path.join(__dirname, "./client/dist", "index.html"));

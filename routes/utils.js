@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
 
-export const authRequired = (req, res, next) => {
+ const authRequired = (req, res, next) => {
   const token = req.signedCookies.token;
   console.log("Cookie Token:", token);
   try {
@@ -18,7 +18,7 @@ export const authRequired = (req, res, next) => {
   next();
 };
 
-export function asyncErrorHandler(callback) {
+ function asyncErrorHandler(callback) {
   return async function (req, res, next) {
     try {
       return callback(req, res, next);
