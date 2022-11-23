@@ -6,9 +6,7 @@ const { asyncErrorHandler } = require("./utils")
 orderRouter.get (
     "/",
     asyncErrorHandler(async (req, res, next) => {
-const orders = await prisma.Order.findMany({
-
-})
+const orders = await prisma.Order.findMany();
 res.send(orders);
 })
 );
