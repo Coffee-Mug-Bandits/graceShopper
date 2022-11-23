@@ -3,12 +3,14 @@ const express = require("express");
 const path = require("path");
 const app = express();
 const morgan = require("morgan");
-// const { COOKIE_SECRET } = process.env;
+const cookieParser = require("cookie-parser");
+const { COOKIE_SECRET } = process.env;
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 // app.use(express.static(path.join(__dirname, "./client", "dist")));
-// app.use(cookieParser(COOKIE_SECRET));
+app.use(cookieParser(COOKIE_SECRET));
 
 app.get("/health", (req, res) => {
   res.send("All healthy here!");
