@@ -5,7 +5,11 @@ const { asyncErrorHandler } = require("./utils");
 orderRouter.get(
   "/",
   asyncErrorHandler(async (req, res, next) => {
-    const orders = await prisma.Order.findMany();
+    const orders = await prisma.Order.findMany({
+      include: {
+        order_products: {},
+      },
+    });
     res.send(orders);
   })
 );
@@ -16,6 +20,9 @@ orderRouter.get(
     const singleOrder = await prisma.Order.findUnique({
       where: {
         id: +req.params.orderid,
+      },
+      include: {
+        order_products: {},
       },
     });
     res.send(singleOrder);
