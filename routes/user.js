@@ -3,8 +3,9 @@ const prisma = require("../prisma/prisma")
 const { asyncErrorHandler, authRequired } = require("./utils")
 const bcrypt = require("bcrypt");
 const SALT_ROUNDS = 10;
-const JWT_SECRET = process.env; 
-const jwt = require ("jsonwebtoken");
+const { JWT_SECRET } = process.env; 
+const jwt = require("jsonwebtoken");
+const { Users } = require("../prisma/seedData");
 
 userRouter.get (
     "/",
@@ -18,17 +19,17 @@ userRouter.post (
     "/register", 
     asyncErrorHandler(async (req, res, next) => {
         const { username, password, email, location } = req.body; 
-        // const checkuser = await prisma.Users.findUnique({
-        //     where: {
-        //         username: username, 
-        //     }
-        // })
-        // if (checkuser) {
-        //     next({
-        //         name: "NotNewUserError",
-        //         message: "That username has been taken",
-        //       });
-        // }
+        const checkuser = await prisma.Users.findUnique({
+            where: {
+                username: username, 
+            }
+        })
+        if (checkuser) {
+            next({
+                name: "NotNewUserError",
+                message: "That username has been taken",
+              });
+        }
 
         const hashedpassword = await bcrypt.hash(password, SALT_ROUNDS);
         const user = await prisma.Users.create({
@@ -40,13 +41,13 @@ userRouter.post (
             }
         })
         delete user.password;
-        // const token = jwt.sign(user, JWT_SECRET);
+        const token = jwt.sign(user, JWT_SECRET);
 
-        // res.cookie("token", token, {
-        //     sameSite: "strict",
-        //     httpOnly: true,
-        //     signed: true,
-        //   });
+        res.cookie("token", token, {
+            sameSite: "strict",
+            httpOnly: true,
+            signed: true,
+          });
 
 
         res.send(user)
@@ -54,4 +55,57 @@ userRouter.post (
 
 )
 
+userRouter.post (
+    "/login",
+    asyncErrorHandler(async (req, res, next) => {
+        const { username, password } = req.body;
+        const user = await prisma.Users.findUnique({
+            where: {
+                username
+            }
+        });
+        const validpassword = await bcrypt.compare(password, user.password);
+        if (validpassword) {
+            const token = jwt.sign(user, JWT_SECRET);
+
+            res.cookie("token", token, {
+                sameSite: "strict",
+                httpOnly: true,
+                signed: true,
+            })
+
+        delete Users.password;
+        res.send({ user })
+    } else next({
+        name: "Invaild Login",
+        message: "Username or Password is incorrect",
+      });
+    })
+);
+
+userRouter.get("/me", authRequired, async (req, res, next) => {
+    try {
+      res.send(req.user);
+    } catch (error) {
+      next(error);
+    }
+  });
+  
+
+  userRouter.post("/logout", async (req, res, next) => {
+    try {
+      res.clearCookie("token", {
+        sameSite: "strict",
+        httpOnly: true,
+        signed: true,
+      });
+      res.send({
+        loggedIn: false,
+        message: "Logged Out",
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
+  
 module.exports = userRouter
