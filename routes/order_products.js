@@ -6,7 +6,7 @@ router.post(
   "/:order_id/:product_id",
   asyncErrorHandler(async (req, res, next) => {
     const { order_id, product_id } = req.params;
-    const op = await prisma.order_products.create({
+    const op = await prisma.Order_products.create({
       data: {
         order_id: +order_id,
         product_id: +product_id,
@@ -20,7 +20,7 @@ router.delete(
   "/:order_id/:product_id",
   asyncErrorHandler(async (req, res, next) => {
     const { order_id, product_id } = req.params;
-    const op = await prisma.order_products.delete({
+    const op = await prisma.Order_products.delete({
       where: {
         order_id: +order_id,
         product_id: +product_id,
