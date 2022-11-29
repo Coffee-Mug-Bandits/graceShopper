@@ -22,6 +22,7 @@ export const products = {
     state.selectedProduct = payload;
   }),
   fetchProduct: thunk(async (actions, payload) => {
+    console.log(payload);
     const { data } = await axios.get(`/routes/product/${payload}`);
     actions.selectProduct(data);
   }),
