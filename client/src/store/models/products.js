@@ -11,9 +11,11 @@ export const products = {
     const { data } = await axios.get("/routes/product");
     actions.setProducts(data);
   }),
-  addProduct: action((state, payload) => [state.data.push(payload)]),
+  addProduct: action((state, payload) => {
+    state.data.push(payload);
+  }),
   createProduct: thunk(async (actions, payload) => {
-    const { data } = await axios.post("/routes/product");
+    const { data } = await axios.post("/routes/product", payload);
     actions.addProduct(data);
   }),
   selectProduct: action((state, payload) => {
@@ -22,5 +24,19 @@ export const products = {
   fetchProduct: thunk(async (actions, payload) => {
     const { data } = await axios.get(`/routes/product/${payload}`);
     actions.selectProduct(data);
+  }),
+  addEditedProduct: action((state, payload) => {
+    const newProducts = state.data.map((product) => {
+      if (product.id === payload.id) return payload;
+      else return product;
+    });
+    state.data = newProducts;
+  }),
+  editProduct: thunk(async (actions, payload) => {
+    const { data } = await axios.patch(
+      `/routes/product/${payload.id}`,
+      payload.data
+    );
+    actions.addEditedProduct(data);
   }),
 };
