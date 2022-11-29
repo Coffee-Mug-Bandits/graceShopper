@@ -25,4 +25,32 @@ export const orders = {
     const { data } = await axios.get(`/routes/order/${payload}`);
     actions.selectOrder(data);
   }),
+  addEditedOrder: action((state, payload) => {
+    const newOrders = state.data.map((order) => {
+      if (order.id === payload.id) return payload;
+      else return order;
+    });
+    state.data = newOrders;
+  }),
+  editOrder: thunk(async (actions, payload) => {
+    const { data } = await axios.patch(
+      `/routes/order/${payload.id}`,
+      payload.data
+    );
+    actions.addEditedOrder(data);
+  }),
+  selectDeletedOrder: action((state, payload) => {
+    const deleteOrders = state.data.map((order) => {
+      if (order.id === payload.id) return payload;
+      else return order;
+    });
+    state.data = deleteOrders; 
+  }),
+  deleteOrder: thunk( async (actions, payload) => {
+    const deleteOrder = await axios.delete(
+      `/routes/order/${payload.id}`,
+      payload.data
+    );
+    actions.selectDeletedOrder(data);
+  }),
 };
