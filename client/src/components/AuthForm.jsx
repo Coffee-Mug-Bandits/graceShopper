@@ -23,8 +23,8 @@ export default function AuthForm() {
           if (method === "login") {
             result = await loginUser({ username, password });
           }
-          // console.log(result);
-          if (result.user) {
+          console.log(result);
+          if (result) {
             // fetch your cart
             setPassword("");
             setUsername("");
