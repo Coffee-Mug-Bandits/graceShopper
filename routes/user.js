@@ -73,7 +73,7 @@ userRouter.post(
         signed: true,
       });
 
-      delete Users.password;
+      delete user.password;
       res.send(user);
     } else
       next({
