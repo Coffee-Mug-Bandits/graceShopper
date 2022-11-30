@@ -9,6 +9,7 @@ export const orders = {
   }),
   fetchOrders: thunk(async (actions, payload) => {
     const { data } = await axios.get("/routes/order");
+
     actions.setOrders(data);
   }),
   addOrder: action((state, payload) => {
@@ -44,9 +45,9 @@ export const orders = {
       if (order.id === payload.id) return payload;
       else return order;
     });
-    state.data = deleteOrders; 
+    state.data = deleteOrders;
   }),
-  deleteOrder: thunk( async (actions, payload) => {
+  deleteOrder: thunk(async (actions, payload) => {
     const deleteOrder = await axios.delete(
       `/routes/order/${payload.id}`,
       payload.data
