@@ -14,10 +14,10 @@ export const users = {
   }),
   loginUser: thunk(async (actions, payload) => {
     const { data } = await axios.post(`/routes/user/login`, payload);
-    actions.selectUser(data);
+    return actions.selectUser(data);
   }),
   logoutUser: thunk(async (actions, payload) => {
     const { data } = await axios.post(`/routes/user/logout`);
-    actions.selectUser({ username: "Guest" });
+    return actions.selectUser({ username: "Guest" });
   }),
 };
