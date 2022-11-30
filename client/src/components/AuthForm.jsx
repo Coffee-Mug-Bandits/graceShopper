@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useUsers from "../hooks/useUsers";
 import { useParams, useNavigate } from "react-router-dom";
 
-export default function Users() {
+export default function AuthForm() {
   const { method } = useParams();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");

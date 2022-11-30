@@ -2,12 +2,17 @@ const orderRouter = require("express").Router();
 const prisma = require("../prisma/prisma");
 const { asyncErrorHandler } = require("./utils");
 
+// Double Check Include Statment
 orderRouter.get(
   "/",
   asyncErrorHandler(async (req, res, next) => {
     const orders = await prisma.Order.findMany({
       include: {
-        order_products: {},
+        order_products: {
+          include: {
+            products: true,
+          },
+        },
       },
     });
     res.send(orders);

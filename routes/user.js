@@ -5,7 +5,6 @@ const bcrypt = require("bcrypt");
 const SALT_ROUNDS = 10;
 const { JWT_SECRET } = process.env;
 const jwt = require("jsonwebtoken");
-const { Users } = require("../prisma/seedData");
 
 userRouter.get(
   "/",
@@ -40,6 +39,8 @@ userRouter.post(
         location: location,
       },
     });
+    // create a cart => user the user.id to create an order where is_cart = true
+
     delete user.password;
     const token = jwt.sign(user, JWT_SECRET);
 
@@ -89,6 +90,10 @@ userRouter.get("/me", authRequired, async (req, res, next) => {
     next(error);
   }
 });
+
+// * GET api/users/me/cart => Get and order where userId is req.user.id and is_cart = true
+
+// GET api/users/myOrders ??
 
 userRouter.post("/logout", async (req, res, next) => {
   try {
