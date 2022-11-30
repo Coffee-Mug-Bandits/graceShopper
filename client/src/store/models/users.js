@@ -13,7 +13,7 @@ export const users = {
   createUser: thunk(async (actions, payload) => {
     const { data } = await axios.post("/routes/user/register", payload);
     actions.addUser(data);
-    actions.selectUser(data);
+    // actions.selectUser(data);
   }),
   selectUser: action((state, payload) => {
     state.selectedUser = payload;
