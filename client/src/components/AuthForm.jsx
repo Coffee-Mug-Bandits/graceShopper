@@ -18,13 +18,14 @@ export default function AuthForm() {
           e.preventDefault();
           let result;
           if (method === "register") {
-            result = await createUser(username, password, email, location);
+            result = await createUser({ username, password, email, location });
           }
           if (method === "login") {
-            result = await loginUser(username, password);
+            result = await loginUser({ username, password });
           }
           // console.log(result);
           if (result.user) {
+            // fetch your cart
             setPassword("");
             setUsername("");
             navigate("/");
