@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useUsers from "../hooks/useUsers";
 import { useParams, useNavigate } from "react-router-dom";
 
-export default function Users() {
+export default function AuthForm() {
   const { method } = useParams();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -18,13 +18,14 @@ export default function Users() {
           e.preventDefault();
           let result;
           if (method === "register") {
-            result = await createUser(username, password, email, location);
+            result = await createUser({ username, password, email, location });
           }
           if (method === "login") {
-            result = await loginUser(username, password);
+            result = await loginUser({ username, password });
           }
           // console.log(result);
           if (result.user) {
+            // fetch your cart
             setPassword("");
             setUsername("");
             navigate("/");
