@@ -36,4 +36,21 @@ router.delete(
   })
 );
 
+router.patch(
+  "/:order_id/:product_id",
+  asyncErrorHandler(async (req, res,next) => {
+    const {order_id, product_id} = req.params;
+    const {qty} = req.body; 
+    const patchop = await prisma.Order_products.update({
+      where: {
+        order_id_product_id: {
+          order_id: +order_id,
+          product_id: +product_id,
+        },
+       },
+      data: {qty: +qty}
+    });
+    res.send(patchop);
+  })
+)
 module.exports = router;

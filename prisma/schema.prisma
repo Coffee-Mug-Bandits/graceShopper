@@ -23,7 +23,7 @@ model Users {
 model Order {
   id             Int              @id @default(autoincrement())
   buyer          Users?           @relation(fields: [user_id], references: [id])
-  user_id        Int               @unique
+  user_id        Int              @unique
   totalAmount    Int
   orderStatus    Status           @default(Placed)
   is_cart        Boolean          @default(false)
