@@ -57,6 +57,8 @@ model Order_products {
   qty        Int
   orders     Order   @relation(fields: [order_id], references: [id])
   products   Product @relation(fields: [product_id], references: [id])
+
+  @@unique([order_id, product_id])
 }
 
 enum Status {
