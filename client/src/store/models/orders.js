@@ -48,7 +48,7 @@ export const orders = {
     state.data = deleteOrders;
   }),
   deleteOrder: thunk(async (actions, payload) => {
-    const deleteOrder = await axios.delete(
+    const { data } = await axios.delete(
       `/routes/order/${payload.id}`,
       payload.data
     );

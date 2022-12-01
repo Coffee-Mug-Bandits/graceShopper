@@ -23,11 +23,21 @@ export const cart = {
       `/routes/order_products/${payload.order_id}/${payload.product_id}`,
       payload.qty
     );
+    actions.addUpdatedQty(data);
   }),
+  removeDeletedItem: action((state, payload) => {
+    const resetCart = state.cart.order_products.map((product) => {
+      if (product.id === payload.product_id) return payload;
+      else return product;
+    });
+    state.cart = resetCart;
+  }),
+
   deleteItem: thunk(async (actions, payload) => {
-    const deleteItem = await axios.delete(
-      `/routes/order_products/${payload}`,
+    const { data } = await axios.delete(
+      `/routes/order_products/${payload.order_id}/${payload.product_id}`,
       payload.data
     );
+    actions.removeDeletedItem(data);
   }),
 };
