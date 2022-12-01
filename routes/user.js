@@ -42,12 +42,12 @@ userRouter.post(
     // create a cart => user the user.id to create an order where is_cart = true
 
     const cart = await prisma.Order.create({
-        data: {
-          user_id: user.id,
-          totalAmount: 0,
-          is_cart: true
-        }
-    })
+      data: {
+        user_id: user.id,
+        totalAmount: 0,
+        is_cart: true,
+      },
+    });
 
     delete user.password;
     const token = jwt.sign(user, JWT_SECRET);
@@ -100,7 +100,21 @@ userRouter.get("/me", authRequired, async (req, res, next) => {
 });
 
 // * GET api/users/me/cart => Get and order where userId is req.user.id and is_cart = true
-
+userRouter.get(
+  "/me/cart",
+  authRequired,
+  asyncErrorHandler(async (req, res, next) => {
+    const cart = await prisma.Order.findUnique({
+      where: { user_id: req.user.id },
+      include: {
+        order_products: {
+          include: { products: true },
+        },
+      },
+    });
+    res.send(cart);
+  })
+);
 // GET api/users/myOrders ??
 
 userRouter.post("/logout", async (req, res, next) => {
