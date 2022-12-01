@@ -22,7 +22,7 @@ model Users {
 
 model Order {
   id             Int              @id @default(autoincrement())
-  buyer          Users            @relation(fields: [user_id], references: [id])
+  buyer          Users?           @relation(fields: [user_id], references: [id])
   user_id        Int
   totalAmount    Int
   orderStatus    Status           @default(Placed)

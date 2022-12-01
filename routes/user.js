@@ -41,6 +41,14 @@ userRouter.post(
     });
     // create a cart => user the user.id to create an order where is_cart = true
 
+    const cart = await prisma.Order.create({
+        data: {
+          user_id: user.id,
+          totalAmount: 0,
+          is_cart: true
+        }
+    })
+
     delete user.password;
     const token = jwt.sign(user, JWT_SECRET);
 
