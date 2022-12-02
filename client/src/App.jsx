@@ -5,10 +5,12 @@ import { Routes, Route } from "react-router-dom";
 import SingleProduct from "./components/SingleProduct";
 import Cart from "./components/Cart";
 import AuthForm from "./components/AuthForm";
+import { Navbar } from "./components/Navbar";
 
 function App() {
   return (
     <div className="App">
+      <Navbar/>
       <Routes>
         <Route path="/products" element={<Products />} />
         <Route path="/products/:productId" element={<SingleProduct />} />

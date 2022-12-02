@@ -32,13 +32,46 @@ export default function AuthForm() {
             fetchCart();
             setPassword("");
             setUsername("");
-            navigate("/");
+            navigate("/products");
           } else {
             setError(result.message);
           }
         }}
       >
         {error && <h4>{error}</h4>}
+        {method === "register" ? (
+          <>
+          <input
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          type="text"
+          placeholder="username"
+        />
+        <input
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="text"
+          placeholder="password"
+        />
+        
+        <input 
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          type="text"
+          placeholder="email"
+        />
+
+        <input
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          type="text"
+          placeholder="location"
+        />
+        </>
+        ) : null
+    }
+     {method === "login" ? (
+      <>
         <input
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -51,21 +84,12 @@ export default function AuthForm() {
           type="text"
           placeholder="password"
         />
-
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          type="text"
-          placeholder="email"
-        />
-        <input
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          type="text"
-          placeholder="location"
-        />
+        </>
+        ) : null
+    }
         <button type="submit">
           {method === "register" ? "Register" : "Login"}
+          
         </button>
       </form>
     </div>
