@@ -2,11 +2,12 @@ import { useStoreState, useStoreActions } from "easy-peasy";
 
 export default function useCart() {
   const cart = useStoreState((state) => {
+    console.log(state);
     return state.cart.cart;
   });
 
   const fetchCart = useStoreActions((actions) => {
-    console.log(actions);
+    console.log(actions.cart.fetchCart);
     return actions.cart.fetchCart;
   });
 
@@ -20,5 +21,5 @@ export default function useCart() {
     return actions.cart.deleteItem;
   });
 
-  return cart, fetchCart, updateQty, deleteItem;
+  return { cart, fetchCart, updateQty, deleteItem };
 }

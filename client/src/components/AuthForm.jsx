@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useUsers from "../hooks/useUsers";
 import { useParams, useNavigate } from "react-router-dom";
+import useCart from "../hooks/useCart";
 
 export default function AuthForm() {
   const { method } = useParams();
@@ -10,6 +11,7 @@ export default function AuthForm() {
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
   const [error, setError] = useState("");
+  const { cart, fetchCart } = useCart();
   const { createUser, selectedUser, loginUser, logoutUser } = useUsers();
   return (
     <div>
@@ -26,6 +28,8 @@ export default function AuthForm() {
           console.log(result);
           if (result) {
             // fetch your cart
+            console.log(fetchCart);
+            fetchCart();
             setPassword("");
             setUsername("");
             navigate("/");
