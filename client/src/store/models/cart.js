@@ -4,7 +4,7 @@ import axios from "axios";
 export const cart = {
   cart: {},
   fetchCart: thunk(async (actions, payload) => {
-    const { data } = await axios.get("/routes/user/me/cart");
+    const { data } = await axios.get("/routes/user/me/cart", payload);
     actions.setCart(data);
   }),
 

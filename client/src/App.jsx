@@ -3,7 +3,7 @@ import React from "react";
 import Products from "./components/Products";
 import { Routes, Route } from "react-router-dom";
 import SingleProduct from "./components/SingleProduct";
-import Orders from "./components/Orders";
+import Cart from "./components/Cart";
 import AuthForm from "./components/AuthForm";
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/products" element={<Products />} />
         <Route path="/products/:productId" element={<SingleProduct />} />
-        <Route path="/orders" element={<Orders />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/:method" element={<AuthForm />} />
       </Routes>
     </div>
