@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import useCart from "../hooks/useCart";
 import useUsers from "../hooks/useUsers";
+import CartCard from "./Cards/CartCard"
 
 export default function Cart() {
   const { cart, fetchCart } = useCart();
@@ -9,6 +10,6 @@ export default function Cart() {
   useEffect(() => {
     fetchCart();
   }, []);
-
-  return <div>{JSON.stringify(cart)}</div>;
+  console.log("cart", cart)
+  return <CartCard cart = {cart}/>;
 }
