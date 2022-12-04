@@ -7,7 +7,7 @@ export function Navbar() {
 
   const { selectedUser, logoutUser } = useUsers();
   return (
-    <div>
+    <div className="flex justify-around bg-yellow-900 h-12 items-center text-white">
       {console.log(selectedUser)}
       <Link to="/products">Shop</Link>
       <form>
