@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import useProducts from "../hooks/useProducts";
+import ProductsCard from "../components/Cards/ProductsCard"
 
 export default function Products() {
   const { products, fetchProducts } = useProducts();
@@ -14,9 +15,8 @@ export default function Products() {
     <div>
       {products.map((product) => {
         console.log(product);
-        return <div>
-          {product.name}
-        </div>;
+        return <ProductsCard product = {product}/>
+
       })}
     </div>
     </div>
