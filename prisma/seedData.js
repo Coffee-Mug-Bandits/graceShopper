@@ -79,6 +79,7 @@ const Product = [
     price: 7000,
     stock_qty: 12,
     description: "Brew your coffee bright and early",
+
     rating: 3,
   },
 ];
