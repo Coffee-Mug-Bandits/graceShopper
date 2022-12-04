@@ -9,7 +9,7 @@ import { Navbar } from "./components/Navbar";
 
 function App() {
   return (
-    <div className="App bg-indigo-500 h-100vh w-100vw">
+    <div className="App ">
       <Navbar />
       <Routes>
         <Route path="/products" element={<Products />} />
