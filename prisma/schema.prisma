@@ -38,6 +38,7 @@ model Product {
   price          Int
   stock_qty      Int
   description    String
+         
   rating         Int
   order_products Order_products[]
 }

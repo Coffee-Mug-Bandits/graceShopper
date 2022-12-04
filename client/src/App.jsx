@@ -9,14 +9,16 @@ import { Navbar } from "./components/Navbar";
 
 function App() {
   return (
-    <div className="App ">
-      <Navbar />
-      <Routes>
-        <Route path="/products" element={<Products />} />
-        <Route path="/products/:productId" element={<SingleProduct />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/:method" element={<AuthForm />} />
-      </Routes>
+    <div className="min-h-full min-w-full">
+      <div className="App bg-gradient-to-t from-yellow-600 to-yellow-100">
+        <Navbar />
+        <Routes>
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:productId" element={<SingleProduct />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/:method" element={<AuthForm />} />
+        </Routes>
+      </div>
     </div>
   );
 }
