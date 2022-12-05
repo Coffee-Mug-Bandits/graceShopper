@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useUsers from "../hooks/useUsers";
 import { useParams, useNavigate } from "react-router-dom";
 import useCart from "../hooks/useCart";
+import { AxiosError } from "axios";
 
 export default function AuthForm() {
   const { method } = useParams();
@@ -34,7 +35,8 @@ export default function AuthForm() {
             setUsername("");
             navigate("/products");
           } else {
-            setError(result.message);
+            console.log(result);
+            setError(AxiosError.response.data.message);
           }
         }}
       >

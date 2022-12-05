@@ -42,13 +42,10 @@ export const cart = {
   }),
 
   createOrderProduct: thunk(async (actions, payload) => {
-    const { data } = await axios.post(
+    await axios.post(
       `/routes/order_products/${payload.order_id}/${payload.product_id}`
     );
-    actions.addOrderProduct(data);
-  }),
-
-  addOrderProduct: action((state, payload) => {
-    state.cart.push(payload);
+    const { data } = await axios.get("/routes/user/me/cart", payload);
+    actions.setCart(data);
   }),
 };
