@@ -40,4 +40,15 @@ export const cart = {
     );
     actions.removeDeletedItem(data);
   }),
+
+  createOrderProduct: thunk(async (actions, payload) => {
+    const { data } = await axios.post(
+      `/routes/order_products/${payload.order_id}/${payload.product_id}`
+    );
+    actions.addOrderProduct(data);
+  }),
+
+  addOrderProduct: action((state, payload) => {
+    state.cart.push(payload);
+  }),
 };
