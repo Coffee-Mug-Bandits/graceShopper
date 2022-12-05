@@ -5,7 +5,7 @@ import useUsers from "../hooks/useUsers";
 import useCart from "../hooks/useCart";
 
 export default function Products() {
-  const { createOrderProduct } = useCart();
+  const { createOrderProduct, cart } = useCart();
   const { products, fetchProducts } = useProducts();
   const { selectedUser } = useUsers();
   useEffect(() => {
@@ -23,6 +23,7 @@ export default function Products() {
           console.log(product);
           return (
             <ProductsCard
+              cart={cart}
               product={product}
               selectedUser={selectedUser}
               createOrderProduct={createOrderProduct}
