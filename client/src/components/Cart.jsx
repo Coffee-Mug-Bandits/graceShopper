@@ -12,7 +12,7 @@ export default function Cart() {
   }, []);
   console.log("cart", cart);
   return (
-    <div>
+    <div className="flex flex-col justify-around flex-wrap">
       <CartCard cart={cart} />
     </div>
   );
