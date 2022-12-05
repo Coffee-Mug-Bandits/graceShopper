@@ -21,5 +21,9 @@ export default function useCart() {
     return actions.cart.deleteItem;
   });
 
-  return { cart, fetchCart, updateQty, deleteItem };
+  const createOrderProduct = useStoreActions((actions) => {
+    return actions.cart.createOrderProduct;
+  });
+
+  return { cart, fetchCart, updateQty, deleteItem, createOrderProduct };
 }

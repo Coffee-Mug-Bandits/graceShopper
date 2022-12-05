@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import useCart from "../hooks/useCart";
 import useUsers from "../hooks/useUsers";
-import CartCard from "./Cards/CartCard"
+import CartCard from "./Cards/CartCard";
 
 export default function Cart() {
   const { cart, fetchCart } = useCart();
@@ -10,6 +10,10 @@ export default function Cart() {
   useEffect(() => {
     fetchCart();
   }, []);
-  console.log("cart", cart)
-  return <CartCard cart = {cart}/>;
+  console.log("cart", cart);
+  return (
+    <div>
+      <CartCard cart={cart} />
+    </div>
+  );
 }

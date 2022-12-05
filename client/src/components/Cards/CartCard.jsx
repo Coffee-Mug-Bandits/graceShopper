@@ -4,6 +4,7 @@ export default function CartCard({ cart }) {
   return (
     <div>
       {cart.order_products.map((op) => {
+        cart.totalAmount += (op.products.price * op.qty) / 2;
         return (
           <div>
             <h2>{op.products.name}</h2>
@@ -16,6 +17,7 @@ export default function CartCard({ cart }) {
           </div>
         );
       })}
+      Total: ${cart.totalAmount}.00
     </div>
   );
 }
