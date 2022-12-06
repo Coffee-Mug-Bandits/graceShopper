@@ -5,9 +5,11 @@ export default function SingleProductCard({
   selectedProduct,
   cart,
   createOrderProduct,
+  setError,
+  error,
 }) {
   const navigate = useNavigate();
-  const [error, setError] = useState();
+
   return (
     <div className="flex items-center flex-col justify-center mt-44">
       <h2 className="text-5xl mb-2">{selectedProduct.name}</h2>
