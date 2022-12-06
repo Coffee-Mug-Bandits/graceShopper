@@ -4,7 +4,7 @@ import axios from "axios";
 export const cart = {
   cart: {},
   fetchCart: thunk(async (actions, payload) => {
-    const { data } = await axios.get("/routes/user/me/cart", payload);
+    const { data } = await axios.get("/routes/user/me/cart");
     actions.setCart(data);
   }),
 
@@ -24,7 +24,7 @@ export const cart = {
       `/routes/order_products/${payload.order_id}/${payload.product_id}`,
       { qty: payload.qty }
     );
-    const { data } = await axios.get("/routes.user/me/cart");
+    const { data } = await axios.get("/routes/user/me/cart");
     actions.setCart(data);
   }),
   removeDeletedItem: action((state, payload) => {
@@ -36,11 +36,11 @@ export const cart = {
   }),
 
   deleteItem: thunk(async (actions, payload) => {
-    const { data } = await axios.delete(
-      `/routes/order_products/${payload.order_id}/${payload.product_id}`,
-      payload.data
+    await axios.delete(
+      `/routes/order_products/${payload.order_id}/${payload.product_id}`
     );
-    actions.removeDeletedItem(data);
+    const { data } = await axios.get("/routes/user/me/cart");
+    actions.setCart(data);
   }),
 
   createOrderProduct: thunk(async (actions, payload) => {
