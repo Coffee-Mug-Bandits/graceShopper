@@ -19,7 +19,7 @@ export function Navbar() {
   }, []);
 
   return (
-    <nav class="w-full fixed top-0 z-50">
+    <nav class="w-full sticky top-0 z-50">
       <div className="flex justify-around bg-yellow-900 h-12 items-center text-white">
         {console.log(selectedUser)}
         <Link to="/products">Shop</Link>
