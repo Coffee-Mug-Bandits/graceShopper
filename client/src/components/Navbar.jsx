@@ -19,32 +19,34 @@ export function Navbar() {
   }, []);
 
   return (
-    <div className="flex justify-around bg-yellow-900 h-12 items-center text-white">
-      {console.log(selectedUser)}
-      <Link to="/products">Shop</Link>
-      {selectedUser.username === "Guest" ? (
-        <>
-          <Link to="/register">Register</Link>
+    <nav class="w-full fixed top-0 z-50">
+      <div className="flex justify-around bg-yellow-900 h-12 items-center text-white">
+        {console.log(selectedUser)}
+        <Link to="/products">Shop</Link>
+        {selectedUser.username === "Guest" ? (
+          <>
+            <Link to="/register">Register</Link>
 
-          <Link to="/login">Login</Link>
-        </>
-      ) : null}
+            <Link to="/login">Login</Link>
+          </>
+        ) : null}
 
-      {selectedUser.username !== "Guest" ? (
-        <>
-          <Link to="/cart">My Cart</Link>
+        {selectedUser.username !== "Guest" ? (
+          <>
+            <Link to="/cart">My Cart</Link>
 
-          <Link to="/profile">My Account</Link>
-          <button
-            onClick={() => {
-              logoutUser();
-              navigate("/products");
-            }}
-          >
-            Logout
-          </button>
-        </>
-      ) : null}
-    </div>
+            <Link to="/profile">My Account</Link>
+            <button
+              onClick={() => {
+                logoutUser();
+                navigate("/products");
+              }}
+            >
+              Logout
+            </button>
+          </>
+        ) : null}
+      </div>
+    </nav>
   );
 }
