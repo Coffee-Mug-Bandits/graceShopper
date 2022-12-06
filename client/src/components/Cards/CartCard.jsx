@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import productCard from "./ProductsCard";
 
 export default function CartCard({
@@ -7,6 +8,9 @@ export default function CartCard({
   fetchCart,
   getMe,
 }) {
+  // useEffect(() => {
+  //   fetchCart();
+  // }, []);
   return (
     <div className="">
       {cart?.order_products?.map((op) => {
@@ -24,12 +28,13 @@ export default function CartCard({
               <button
                 onClick={async () => {
                   console.log(op.qty);
-
+                  console.log(fetchCart);
                   await updateQty({
                     order_id: op.order_id,
                     product_id: op.product_id,
                     qty: ++op.qty,
                   });
+                  fetchCart();
                 }}
               >
                 +
