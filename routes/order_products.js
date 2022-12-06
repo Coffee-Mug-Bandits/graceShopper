@@ -18,7 +18,7 @@ router.post(
     if (checkOp) {
       next({
         name: "ItemInCart",
-        message: "Item is already in cart",
+        message: "ITEM IS ALREADY IN CART!",
       });
     } else {
       const op = await prisma.Order_products.create({
