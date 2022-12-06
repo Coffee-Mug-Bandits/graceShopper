@@ -7,7 +7,7 @@ import useCart from "../hooks/useCart";
 export default function SingleProduct() {
   const { productId } = useParams();
   const { selectedProduct, fetchProduct } = useProducts();
-  const { cart } = useCart();
+  const { cart, createOrderProduct } = useCart();
 
   useEffect(() => {
     fetchProduct(productId);
@@ -16,7 +16,11 @@ export default function SingleProduct() {
   return (
     <div>
       {" "}
-      <SingleProductCard selectedProduct={selectedProduct} cart={cart} />{" "}
+      <SingleProductCard
+        selectedProduct={selectedProduct}
+        cart={cart}
+        createOrderProduct={createOrderProduct}
+      />{" "}
     </div>
   );
 }

@@ -1,7 +1,13 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function SingleProductCard({ selectedProduct }) {
+export default function SingleProductCard({
+  selectedProduct,
+  cart,
+  createOrderProduct,
+}) {
   const navigate = useNavigate();
+  const [error, setError] = useState();
   return (
     <div className="flex items-center flex-col justify-center mt-44">
       <h2 className="text-5xl mb-2">{selectedProduct.name}</h2>
@@ -23,6 +29,7 @@ export default function SingleProductCard({ selectedProduct }) {
               setError("");
             } catch (err) {
               setError(err.response.data.message);
+              console.log(error);
             }
           }}
           className="text-2xl absolute right-28 mt-20 bg-yellow-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
