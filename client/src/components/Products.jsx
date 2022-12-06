@@ -13,15 +13,33 @@ export default function Products() {
   const [error, setError] = useState();
   const { selectedUser } = useUsers();
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
   useEffect(() => {
     fetchProducts();
   }, []);
   console.log(selectedUser);
+
+  function productMatches(product, text) {
+    return product.name.toLowerCase().includes(text.toLowerCase());
+  }
+  const filteredProd = products.filter((product) =>
+    productMatches(product, searchTerm)
+  );
+  const prodsToDisplay = searchTerm.length ? filteredProd : products;
   return (
     <div>
-      <h1 className="flex justify-center mb-10 text-xl font-mono">
-        Welcome to Legally Sold Coffee Mugs
-      </h1>
+      <div>
+        <h1 className="flex justify-center mb-10 text-xl font-mono">
+          Welcome to Legally Sold Coffee Mugs
+        </h1>
+        <input
+          className="mt-1 border-2 border-solid border-gray-500 rounded transition ease-in-out focus:border-yellow-400 focus:outline-none"
+          type="text"
+          value={searchTerm}
+          placeHolder="Search"
+          onChange={(e) => setSearchTerm(e.target.value)}
+        ></input>
+      </div>
 
       {error && (
         <h3
@@ -45,7 +63,7 @@ export default function Products() {
         </h3>
       )}
       <div className="flex flex-row justify-around flex-wrap gap-y-6">
-        {products.map((product) => {
+        {prodsToDisplay.map((product) => {
           console.log(product);
           return (
             <ProductsCard
