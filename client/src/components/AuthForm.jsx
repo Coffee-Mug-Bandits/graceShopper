@@ -15,7 +15,7 @@ export default function AuthForm() {
   const { cart, fetchCart } = useCart();
   const { createUser, selectedUser, loginUser, logoutUser } = useUsers();
   return (
-    <div>
+    <div className="flex justify-center items-center p-10 bg-amber-50 border-amber-900 border-2 h-96 w-60 mx-80 my-40">
       <form
         onSubmit={async (e) => {
           e.preventDefault();
@@ -55,12 +55,14 @@ export default function AuthForm() {
         {method === "register" ? (
           <>
             <input
+              className="shadow-xl mb-2 italic"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               type="text"
               placeholder="username"
             />
             <input
+              className="shadow-xl mb-2 italic"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               type="text"
@@ -68,6 +70,7 @@ export default function AuthForm() {
             />
 
             <input
+              className="shadow-xl mb-2 italic"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               type="text"
@@ -75,6 +78,7 @@ export default function AuthForm() {
             />
 
             <input
+              className="shadow-xl mb-2 italic"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               type="text"
@@ -84,13 +88,18 @@ export default function AuthForm() {
         ) : null}
         {method === "login" ? (
           <>
+            {/* <h2 className="flex font-bold italic text-2xl justify-center pb-6">
+              LOGIN
+            </h2> */}
             <input
+              className="shadow-xl mb-2 italic"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               type="text"
               placeholder="username"
             />
             <input
+              className="shadow-xl mb-2 italic"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               type="text"
@@ -98,7 +107,10 @@ export default function AuthForm() {
             />
           </>
         ) : null}
-        <button type="submit">
+        <button
+          className="bg-yellow-900 text-yellow-50 font-bold w-44 h-8 py-1 px-4 rounded"
+          type="submit"
+        >
           {method === "register" ? "Register" : "Login"}
         </button>
       </form>

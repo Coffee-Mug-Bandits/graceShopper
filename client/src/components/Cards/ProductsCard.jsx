@@ -15,7 +15,7 @@ export default function productCard({
       <h3 className="mt-6">
         ${product.price}.00{" "}
         <button
-          className="bg-blue-500 font-bold py-2 px-4 rounded"
+          className="bg-blue-500 text-yellow-50 py-2 px-4 rounded"
           onClick={async () => {
             try {
               await createOrderProduct({
