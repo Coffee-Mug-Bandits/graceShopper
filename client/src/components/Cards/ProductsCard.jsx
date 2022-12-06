@@ -1,4 +1,9 @@
-export default function productCard({ product, cart, createOrderProduct }) {
+export default function productCard({
+  product,
+  cart,
+  createOrderProduct,
+  setError,
+}) {
   return (
     <div className="flex bg-gradient-to-t from-yellow-900 to-yellow-600 items-center flex-col flex-wrap border-black border-x-2 border-y-2 h-96 w-60 rounded-md text-yellow-50">
       <h2>{product.name}</h2>
@@ -12,25 +17,21 @@ export default function productCard({ product, cart, createOrderProduct }) {
         <button
           className="bg-blue-500 font-bold py-2 px-4 rounded"
           onClick={async () => {
-            cart.order_products.map((item) => {
-              console.log(item);
-              console.log(product.id);
-              if (product.id === item.product_id) {
-                return;
-              }
-            });
-
-            await createOrderProduct({
-              order_id: cart.id,
-              product_id: product.id,
-            });
+            try {
+              await createOrderProduct({
+                order_id: cart.id,
+                product_id: product.id,
+              });
+              setError("");
+            } catch (err) {
+              setError(err.response.data.message);
+            }
           }}
         >
           {" "}
           Add to Cart
         </button>
       </h3>
-      <div></div>
     </div>
   );
 }
