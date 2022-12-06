@@ -16,9 +16,6 @@ export function Navbar() {
     <div className="flex justify-around bg-yellow-900 h-12 items-center text-white">
       {console.log(selectedUser)}
       <Link to="/products">Shop</Link>
-      <form>
-        <input placeholder="Search"></input>
-      </form>
       {selectedUser.username === "Guest" ? (
         <>
           <Link to="/register">Register</Link>
