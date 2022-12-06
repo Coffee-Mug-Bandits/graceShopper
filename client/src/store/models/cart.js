@@ -19,11 +19,13 @@ export const cart = {
     state.cart = newQty;
   }),
   updateQty: thunk(async (actions, payload) => {
-    const { data } = await axios.patch(
+    console.log(payload);
+    await axios.patch(
       `/routes/order_products/${payload.order_id}/${payload.product_id}`,
-      payload.qty
+      { qty: payload.qty }
     );
-    actions.addUpdatedQty(data);
+    const { data } = await axios.get("/routes.user/me/cart");
+    actions.setCart(data);
   }),
   removeDeletedItem: action((state, payload) => {
     const resetCart = state.cart.order_products.map((product) => {
