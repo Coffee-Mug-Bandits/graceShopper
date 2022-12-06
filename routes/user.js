@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const SALT_ROUNDS = 10;
 const { JWT_SECRET } = process.env;
 const jwt = require("jsonwebtoken");
+const e = require("express");
 
 userRouter.get(
   "/",
@@ -28,37 +29,37 @@ userRouter.post(
         name: "NotNewUserError",
         message: "That username has been taken",
       });
+    } else {
+      const hashedpassword = await bcrypt.hash(password, SALT_ROUNDS);
+      const user = await prisma.Users.create({
+        data: {
+          username: username,
+          password: hashedpassword,
+          email: email,
+          location: location,
+        },
+      });
+      // create a cart => user the user.id to create an order where is_cart = true
+
+      const cart = await prisma.Order.create({
+        data: {
+          user_id: user.id,
+          totalAmount: 0,
+          is_cart: true,
+        },
+      });
+
+      delete user.password;
+      const token = jwt.sign(user, JWT_SECRET);
+
+      res.cookie("token", token, {
+        sameSite: "strict",
+        httpOnly: true,
+        signed: true,
+      });
+
+      res.send(user);
     }
-
-    const hashedpassword = await bcrypt.hash(password, SALT_ROUNDS);
-    const user = await prisma.Users.create({
-      data: {
-        username: username,
-        password: hashedpassword,
-        email: email,
-        location: location,
-      },
-    });
-    // create a cart => user the user.id to create an order where is_cart = true
-
-    const cart = await prisma.Order.create({
-      data: {
-        user_id: user.id,
-        totalAmount: 0,
-        is_cart: true,
-      },
-    });
-
-    delete user.password;
-    const token = jwt.sign(user, JWT_SECRET);
-
-    res.cookie("token", token, {
-      sameSite: "strict",
-      httpOnly: true,
-      signed: true,
-    });
-
-    res.send(user);
   })
 );
 
@@ -68,26 +69,33 @@ userRouter.post(
     const { username, password } = req.body;
     const user = await prisma.Users.findUnique({
       where: {
-        username,
+        username: username,
       },
     });
-    const validpassword = await bcrypt.compare(password, user.password);
-    if (validpassword) {
-      const token = jwt.sign(user, JWT_SECRET);
+    if (user) {
+      const validpassword = await bcrypt.compare(password, user.password);
+      if (validpassword) {
+        const token = jwt.sign(user, JWT_SECRET);
 
-      res.cookie("token", token, {
-        sameSite: "strict",
-        httpOnly: true,
-        signed: true,
-      });
-
-      delete user.password;
-      res.send(user);
-    } else
+        res.cookie("token", token, {
+          sameSite: "strict",
+          httpOnly: true,
+          signed: true,
+        });
+        delete user.password;
+        res.send(user);
+      } else {
+        next({
+          name: "Invaild Login",
+          message: "Username or Password is incorrect",
+        });
+      }
+    } else {
       next({
         name: "Invaild Login",
         message: "Username or Password is incorrect",
       });
+    }
   })
 );
 

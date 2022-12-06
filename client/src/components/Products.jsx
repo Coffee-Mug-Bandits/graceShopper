@@ -3,10 +3,12 @@ import useProducts from "../hooks/useProducts";
 import ProductsCard from "../components/Cards/ProductsCard";
 import useUsers from "../hooks/useUsers";
 import useCart from "../hooks/useCart";
+import { useState } from "react";
 
 export default function Products() {
   const { createOrderProduct, cart } = useCart();
   const { products, fetchProducts } = useProducts();
+  const [error, setError] = useState();
   const { selectedUser } = useUsers();
   useEffect(() => {
     fetchProducts();
@@ -18,6 +20,7 @@ export default function Products() {
         Welcome to Legally Sold Coffee Mugs
       </h1>
 
+      {error && <h3 className="flex justify-center text-red-500">{error}</h3>}
       <div className="flex flex-row justify-around flex-wrap gap-y-6">
         {products.map((product) => {
           console.log(product);
@@ -27,6 +30,8 @@ export default function Products() {
               product={product}
               selectedUser={selectedUser}
               createOrderProduct={createOrderProduct}
+              setError={setError}
+              error={error}
             />
           );
         })}

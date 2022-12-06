@@ -21,26 +21,37 @@ export default function AuthForm() {
           e.preventDefault();
           let result;
           if (method === "register") {
-            result = await createUser({ username, password, email, location });
+            try {
+              result = await createUser({
+                username,
+                password,
+                email,
+                location,
+              });
+            } catch (err) {
+              setError(err.response.data.message);
+            }
           }
           if (method === "login") {
-            result = await loginUser({ username, password });
+            try {
+              result = await loginUser({ username, password });
+            } catch (err) {
+              setError(err.response.data.message);
+            }
           }
           console.log(result);
+          console.log(error);
+
+          // fetch your cart
           if (result) {
-            // fetch your cart
             console.log(fetchCart);
             fetchCart();
             setPassword("");
             setUsername("");
             navigate("/products");
-          } else {
-            console.log(result);
-            setError(AxiosError.response.data.message);
           }
         }}
       >
-        {error && <h4>{error}</h4>}
         {method === "register" ? (
           <>
             <input
@@ -91,6 +102,7 @@ export default function AuthForm() {
           {method === "register" ? "Register" : "Login"}
         </button>
       </form>
+      {error && <h4>{error}</h4>}
     </div>
   );
 }

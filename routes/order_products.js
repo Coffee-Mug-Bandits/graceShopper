@@ -6,14 +6,31 @@ router.post(
   "/:order_id/:product_id",
   asyncErrorHandler(async (req, res, next) => {
     const { order_id, product_id } = req.params;
-    const op = await prisma.Order_products.create({
-      data: {
-        order_id: +order_id,
-        product_id: +product_id,
-        qty: 1,
+    const checkOp = await prisma.Order_products.findUnique({
+      where: {
+        order_id_product_id: {
+          order_id: +order_id,
+          product_id: +product_id,
+        },
       },
     });
-    res.send(op);
+
+    if (checkOp) {
+      next({
+        name: "ItemInCart",
+        message: "Item is already in cart",
+      });
+    } else {
+      const op = await prisma.Order_products.create({
+        data: {
+          order_id: +order_id,
+          product_id: +product_id,
+          qty: 1,
+        },
+      });
+
+      res.send(op);
+    }
   })
 );
 
@@ -38,19 +55,19 @@ router.delete(
 
 router.patch(
   "/:order_id/:product_id",
-  asyncErrorHandler(async (req, res,next) => {
-    const {order_id, product_id} = req.params;
-    const {qty} = req.body; 
+  asyncErrorHandler(async (req, res, next) => {
+    const { order_id, product_id } = req.params;
+    const { qty } = req.body;
     const patchop = await prisma.Order_products.update({
       where: {
         order_id_product_id: {
           order_id: +order_id,
           product_id: +product_id,
         },
-       },
-      data: {qty: +qty}
+      },
+      data: { qty: +qty },
     });
     res.send(patchop);
   })
-)
+);
 module.exports = router;
