@@ -16,9 +16,9 @@ export default function AuthForm() {
   const { cart, fetchCart } = useCart();
   const { createUser, selectedUser, loginUser, logoutUser } = useUsers();
   return (
-    <div className="flex flex-col justify-center items-center mt-40 p-10 bg-amber-50 border-amber-900 border-2 h-96 w-96">
+    <div className="flex flex-col justify-center items-center ml-40 mt-40 p-10 bg-amber-50 border-amber-900 border-2 h-96 w-96">
       <form
-        className=" flex flex-col"
+        className=" flex flex-col items-center"
         onSubmit={async (e) => {
           e.preventDefault();
           let result;
@@ -56,6 +56,9 @@ export default function AuthForm() {
       >
         {method === "register" ? (
           <>
+            <h2 className="flex flex-col text-center text-black text-3xl font-bold font-mono">
+              Welcome, Register Here!
+            </h2>
             <input
               className="shadow-xl mb-2 italic"
               value={username}
@@ -90,8 +93,8 @@ export default function AuthForm() {
         ) : null}
         {method === "login" ? (
           <>
-            <h2 className="flex text-black text-4xl font-bold font-mono">
-              Welcome Coffee Mug Bandit!
+            <h2 className="flex text-black text-center text-2xl font-bold font-mono">
+              Welcome Back, Coffee Mug Bandit!
             </h2>
             <input
               className="shadow-xl mb-2 italic"
@@ -110,14 +113,17 @@ export default function AuthForm() {
           </>
         ) : null}
         <button
-          className="bg-yellow-900 text-yellow-50 font-bold w-44 h-8 py-1 px-4 rounded"
+          className=" flex bg-yellow-900 text-yellow-50 font-bold w-24 h-8 py-1 px-4 rounded"
           type="submit"
         >
           {method === "register" ? "Register" : "Login"}
         </button>
       </form>
-      <h5>
-        Not a Member? <Link to="/register">Register Here!</Link>
+      <h5 className="text-sm font-mono">
+        Not a Member?{" "}
+        <Link className="hover:underline cursor-pointer" to="/register">
+          Register Here!
+        </Link>
       </h5>
 
       {error && (
