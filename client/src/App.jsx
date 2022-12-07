@@ -6,7 +6,8 @@ import SingleProduct from "./components/SingleProduct";
 import Cart from "./components/Cart";
 import AuthForm from "./components/AuthForm";
 import { Navbar } from "./components/Navbar";
-import { Footer } from "./components/Footer"
+import { Footer } from "./components/Footer";
+import Checkout from "./components/Checkout";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/products/:productId" element={<SingleProduct />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/:method" element={<AuthForm />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
         <Footer />
       </div>
