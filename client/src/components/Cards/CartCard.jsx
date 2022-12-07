@@ -23,6 +23,7 @@ export default function CartCard({
             <h2 className="self-auto">Qty: {op.qty}</h2>
             <span className="flex flex-col ">
               <button
+                className="font-mono text-xl"
                 onClick={async () => {
                   console.log(op.qty);
                   console.log(fetchCart);
@@ -37,6 +38,7 @@ export default function CartCard({
                 +
               </button>
               <button
+                className="font-mono text-xl"
                 onClick={async () => {
                   console.log(op.qty);
                   if (op.qty === 1) {

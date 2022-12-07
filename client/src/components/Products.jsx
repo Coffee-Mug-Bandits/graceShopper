@@ -29,9 +29,10 @@ export default function Products() {
   return (
     <div>
       <div className="flex flex-col justify-center items-center">
-        <h1 className="flex justify-center mb-10 text-xl font-mono">
-          Welcome to Legally Sold Coffee Mugs
-        </h1>
+        <img
+          className=" h-60 w-60"
+          src="https://res.cloudinary.com/dwrkj2mfe/image/upload/v1670439161/coffee/Coffee_Ring_Stain_Coffee_Shop_Logo_2_jnnxfn.png"
+        />
         <input
           className="w-80 mt-1 mb-12 border-2 border-solid border-gray-500 rounded transition ease-in-out focus:border-yellow-400 focus:outline-none"
           type="text"
