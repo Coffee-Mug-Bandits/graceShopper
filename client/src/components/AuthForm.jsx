@@ -50,7 +50,7 @@ export default function AuthForm() {
             fetchCart();
             setPassword("");
             setUsername("");
-            navigate("/products");
+            navigate("/");
           }
         }}
       >

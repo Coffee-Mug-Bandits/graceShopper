@@ -28,12 +28,12 @@ export default function Products() {
   const prodsToDisplay = searchTerm.length ? filteredProd : products;
   return (
     <div>
-      <div>
+      <div className="flex flex-col justify-center items-center">
         <h1 className="flex justify-center mb-10 text-xl font-mono">
           Welcome to Legally Sold Coffee Mugs
         </h1>
         <input
-          className="mt-1 border-2 border-solid border-gray-500 rounded transition ease-in-out focus:border-yellow-400 focus:outline-none"
+          className="w-80 mt-1 mb-12 border-2 border-solid border-gray-500 rounded transition ease-in-out focus:border-yellow-400 focus:outline-none"
           type="text"
           value={searchTerm}
           placeHolder="Search"
