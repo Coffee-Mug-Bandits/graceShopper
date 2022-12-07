@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export function Footer() {
     return (
-        <div className="flex flex-row justify-evenly bg-yellow-800 mt-10 text-yellow-100">
+        <div className="flex flex-row justify-evenly bg-yellow-800 text-yellow-100">
         <div className="flex flex-col">
          <h1 className="text-2xl border-b-2 border-black-100">Contact Us</h1>
             <Link className=" hover:underline">Email</Link>

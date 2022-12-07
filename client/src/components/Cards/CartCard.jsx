@@ -69,7 +69,9 @@ export default function CartCard({
           </div>
         );
       })}
+      <div className="text-3xl">
       Total: ${cart.totalAmount}.00
+      </div>
     </div>
   );
 }
