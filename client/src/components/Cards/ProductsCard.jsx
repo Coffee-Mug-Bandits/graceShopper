@@ -17,9 +17,8 @@ export default function productCard({
         {product.name}
       </h1>
       <img
-        className="h-40 mt-4 hover:scale-90 cursor-pointer "
-        onClick={() => navigate(`/products/${product.id}`)}
-        src="https://m.media-amazon.com/images/I/717zDSCMKPL._AC_SX425_.jpg"
+        className="h-60 border-amber-400 border-2 rounded-3xl"
+        src={product.imageUrl}
       />
       <h4 className="mt-4 ml-5 text-base font-mono">{product.description}</h4>
       <h3 className="mt-6 flex justify-center  ">${product.price}.00 </h3>
