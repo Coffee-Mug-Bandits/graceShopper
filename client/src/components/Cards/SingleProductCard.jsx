@@ -7,6 +7,7 @@ export default function SingleProductCard({
   createOrderProduct,
   setError,
   error,
+  selectedUser,
 }) {
   const navigate = useNavigate();
 
@@ -24,24 +25,27 @@ export default function SingleProductCard({
           <h3 className="font-mono justify-items-center mb-8 font-bold text-xl">
             Price: ${selectedProduct.price}.00
           </h3>
-          <button
-            onClick={async () => {
-              try {
-                await createOrderProduct({
-                  order_id: cart.id,
-                  product_id: selectedProduct.id,
-                });
-                setError("");
-              } catch (err) {
-                setError(err.response.data.message);
-                console.log(error);
-              }
-            }}
-            className="flex justify-center mb-4 w-48 h-12 bg-yellow-50 hover:bg-yellow-200 hover:scale-95 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-          >
-            {" "}
-            Add to Cart{" "}
-          </button>
+          {selectedUser.username !== "Guest" ? (
+            <button
+              onClick={async () => {
+                try {
+                  await createOrderProduct({
+                    order_id: cart.id,
+                    product_id: selectedProduct.id,
+                  });
+                  setError("");
+                } catch (err) {
+                  setError(err.response.data.message);
+                  console.log(error);
+                }
+              }}
+              className="flex justify-center mb-4 w-48 h-12 bg-yellow-50 hover:bg-yellow-200 hover:scale-95 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+            >
+              {" "}
+              Add to Cart{" "}
+            </button>
+          ) : null}
+
           <button
             onClick={() => {
               navigate(`/`);
