@@ -22,7 +22,7 @@ export function Navbar() {
     <nav class="w-full sticky top-0 z-50">
       <div className="flex justify-around bg-yellow-900 h-12 items-center text-white">
         {console.log(selectedUser)}
-        <Link to="/products">Shop</Link>
+        <Link to="/">Shop</Link>
         {selectedUser.username === "Guest" ? (
           <>
             <Link to="/register">Register</Link>
@@ -39,7 +39,7 @@ export function Navbar() {
             <button
               onClick={() => {
                 logoutUser();
-                navigate("/products");
+                navigate("/");
               }}
             >
               Logout

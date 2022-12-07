@@ -44,7 +44,7 @@ export default function SingleProductCard({
           </button>
           <button
             onClick={() => {
-              navigate(`/products`);
+              navigate(`/`);
             }}
             className="flex justify-center mt-6 w-48 h-12 bg-yellow-50 hover:bg-yellow-200 hover:scale-95 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
           >
