@@ -4,12 +4,14 @@ import { useParams } from "react-router-dom";
 import SingleProductCard from "./Cards/SingleProductCard";
 import useCart from "../hooks/useCart";
 import { useState } from "react";
+import useUsers from "../hooks/useUsers";
 
 export default function SingleProduct() {
   const { productId } = useParams();
   const { selectedProduct, fetchProduct } = useProducts();
   const { cart, createOrderProduct } = useCart();
   const [error, setError] = useState();
+  const { selectedUser } = useUsers();
 
   useEffect(() => {
     fetchProduct(productId);
@@ -44,6 +46,7 @@ export default function SingleProduct() {
         createOrderProduct={createOrderProduct}
         setError={setError}
         error={error}
+        selectedUser={selectedUser}
       />{" "}
     </div>
   );

@@ -6,6 +6,7 @@ export default function productCard({
   createOrderProduct,
   setError,
   navigate,
+  selectedUser,
 }) {
   // const navigate = useNavigate();
   return (
@@ -17,29 +18,31 @@ export default function productCard({
         {product.name}
       </h1>
       <img
-        className="h-60 border-amber-400 border-2 rounded-3xl"
+        className="h-60 border-amber-400 border-2 rounded-3xl hover:scale-90 cursor-pointer"
+        onClick={() => navigate(`/products/${product.id}`)}
         src={product.imageUrl}
       />
       <h4 className="mt-4 ml-5 text-base font-mono">{product.description}</h4>
       <h3 className="mt-6 flex justify-center  ">${product.price}.00 </h3>
-
-      <button
-        className=" flex justify-center w-30 bg-yellow-50 hover:bg-yellow-200 hover:scale-95 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-        onClick={async () => {
-          try {
-            await createOrderProduct({
-              order_id: cart.id,
-              product_id: product.id,
-            });
-            setError("");
-          } catch (err) {
-            setError(err.response.data.message);
-          }
-        }}
-      >
-        {" "}
-        Add to Cart
-      </button>
+      {selectedUser.username !== "Guest" ? (
+        <button
+          className=" flex justify-center w-30 bg-yellow-50 hover:bg-yellow-200 hover:scale-95 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+          onClick={async () => {
+            try {
+              await createOrderProduct({
+                order_id: cart.id,
+                product_id: product.id,
+              });
+              setError("");
+            } catch (err) {
+              setError(err.response.data.message);
+            }
+          }}
+        >
+          {" "}
+          Add to Cart
+        </button>
+      ) : null}
     </div>
   );
 }

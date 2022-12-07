@@ -57,11 +57,21 @@ export default function CartCard({
               >
                 -
               </button>
+              <button
+              onClick={async () => {
+                await deleteItem({
+                  order_id: op.order_id,
+                  product_id: op.product_id,
+                });
+              }}
+              >Delete</button>
             </span>
           </div>
         );
       })}
+      <div className="text-3xl">
       Total: ${cart.totalAmount}.00
+      </div>
     </div>
   );
 }
