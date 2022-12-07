@@ -21,11 +21,12 @@ export default function CartCard({
               className="h-20"
               src="https://m.media-amazon.com/images/I/717zDSCMKPL._AC_SX425_.jpg"
             />
-            <h2 className="p-4">{op.products.name}</h2>
-            <h2 className="p-4">Price: ${op.products.price}.00</h2>
-            <h2 className="self-auto">Qty: {op.qty}</h2>
+            <h2 className="p-4 font-mono text-xl">{op.products.name}</h2>
+            <h2 className="p-4 font-mono">Price: ${op.products.price}.00</h2>
+            <h2 className="self-auto font-mono">Qty: {op.qty}</h2>
             <span className="flex flex-col ">
               <button
+                className="font-mono text-xl"
                 onClick={async () => {
                   console.log(op.qty);
                   console.log(fetchCart);
@@ -40,6 +41,7 @@ export default function CartCard({
                 +
               </button>
               <button
+                className="font-mono text-xl"
                 onClick={async () => {
                   console.log(op.qty);
                   if (op.qty === 1) {
