@@ -57,6 +57,14 @@ export default function CartCard({
               >
                 -
               </button>
+              <button
+              onClick={async () => {
+                await deleteItem({
+                  order_id: op.order_id,
+                  product_id: op.product_id,
+                });
+              }}
+              >Delete</button>
             </span>
           </div>
         );
