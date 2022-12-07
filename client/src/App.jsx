@@ -6,6 +6,7 @@ import SingleProduct from "./components/SingleProduct";
 import Cart from "./components/Cart";
 import AuthForm from "./components/AuthForm";
 import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer"
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/:method" element={<AuthForm />} />
         </Routes>
+        <Footer />
       </div>
     </div>
   );
