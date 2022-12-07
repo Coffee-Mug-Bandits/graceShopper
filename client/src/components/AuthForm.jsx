@@ -90,6 +90,12 @@ export default function AuthForm() {
                 type="text"
                 placeholder="location"
               />
+              <button
+                className=" flex bg-yellow-900 text-yellow-50 font-bold w-24 h-8 py-1 px-4 rounded"
+                type="submit"
+              >
+                {method === "register" ? "Register" : "Login"}
+              </button>
             </>
           ) : null}
           {method === "login" ? (
@@ -111,21 +117,21 @@ export default function AuthForm() {
                 type="password"
                 placeholder="password"
               />
+              <button
+                className=" flex bg-yellow-900 text-yellow-50 font-bold w-24 h-8 py-1 px-4 rounded"
+                type="submit"
+              >
+                {method === "register" ? "Register" : "Login"}
+              </button>
+              <h5 className="text-sm font-mono">
+                Not a Member?{" "}
+                <Link className="hover:underline cursor-pointer" to="/register">
+                  Register Here!
+                </Link>
+              </h5>
             </>
           ) : null}
-          <button
-            className=" flex bg-yellow-900 text-yellow-50 font-bold w-24 h-8 py-1 px-4 rounded"
-            type="submit"
-          >
-            {method === "register" ? "Register" : "Login"}
-          </button>
         </form>
-        <h5 className="text-sm font-mono">
-          Not a Member?{" "}
-          <Link className="hover:underline cursor-pointer" to="/register">
-            Register Here!
-          </Link>
-        </h5>
 
         {error && (
           <h4
