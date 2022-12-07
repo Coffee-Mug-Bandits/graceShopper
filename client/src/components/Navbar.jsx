@@ -25,8 +25,6 @@ export function Navbar() {
         <Link to="/">Shop</Link>
         {selectedUser.username === "Guest" ? (
           <>
-            <Link to="/register">Register</Link>
-
             <Link to="/login">Login</Link>
           </>
         ) : null}
