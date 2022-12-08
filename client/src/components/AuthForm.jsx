@@ -4,6 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import { AxiosError } from "axios";
 import { Link } from "react-router-dom";
+import useOrders from "../hooks/useOrders";
 
 export default function AuthForm() {
   const { method } = useParams();
@@ -14,6 +15,7 @@ export default function AuthForm() {
   const [location, setLocation] = useState("");
   const [error, setError] = useState("");
   const { cart, fetchCart } = useCart();
+  const { fetchOrders } = useOrders();
   const { createUser, selectedUser, loginUser, logoutUser } = useUsers();
   return (
     <div className="flex justify-center">
@@ -49,6 +51,7 @@ export default function AuthForm() {
             if (result) {
               console.log(fetchCart);
               fetchCart();
+              fetchOrders();
               setPassword("");
               setUsername("");
               navigate("/");

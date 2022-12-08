@@ -2,12 +2,14 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import useCart from "../hooks/useCart";
+import useOrders from "../hooks/useOrders";
 import useUsers from "../hooks/useUsers";
 
 export function Navbar() {
   const navigate = useNavigate();
   const { selectedUser, logoutUser, getMe } = useUsers();
   const { fetchCart, cart } = useCart();
+  // const { fetchOrders } = useOrders();
 
   useEffect(() => {
     // call fetchMe, if this respons with a user then you can getch the user cart
@@ -15,6 +17,7 @@ export function Navbar() {
     // call fetchCart
     if (selectedUser) {
       fetchCart();
+      // fetchOrders();
     }
   }, []);
 
@@ -37,7 +40,7 @@ export function Navbar() {
           <>
             <Link to="/cart">My Cart</Link>
 
-            <Link to="/profile">My Account</Link>
+            <Link to="/myOrders">My Orders</Link>
             <button
               onClick={() => {
                 logoutUser();
