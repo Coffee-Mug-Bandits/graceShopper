@@ -22,7 +22,7 @@ export function Footer() {
         <h1 className="text-2xl border-b-2 border-black-100">
           Let Us Help You
         </h1>
-        <Link className=" hover:underline">Shipping Rates and Policies</Link>
+        <Link className=" hover:underline">Shipping Rates and Policies </Link>
         <Link className=" hover:underline">
           Purchase CoffV.I.P for exclusive news and discounts
         </Link>
