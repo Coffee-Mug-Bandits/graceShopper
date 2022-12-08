@@ -14,7 +14,11 @@ export default function Cart() {
   }, []);
   console.log("cart", cart);
   return (
+<<<<<<< HEAD
+    <div className="h-96 max-w-full flex flex-col justify-around flex-wrap mb-96">
+=======
     <div className=" flex flex-col justify-around flex-wrap">
+>>>>>>> main
       <CartCard
         cart={cart}
         updateQty={updateQty}

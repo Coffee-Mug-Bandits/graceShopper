@@ -19,7 +19,7 @@ export default function AuthForm() {
   const { createUser, selectedUser, loginUser, logoutUser } = useUsers();
   return (
     <div className="flex justify-center">
-      <div className="flex flex-col justify-center items-center  mt-40 p-10 bg-amber-50 border-amber-900 border-2 h-96 w-96">
+      <div className="flex flex-col justify-center items-center  mt-40 p-10 bg-amber-50 border-amber-900 border-2 h-96 w-96 mb-40">
         <form
           className=" flex flex-col items-center"
           onSubmit={async (e) => {
