@@ -9,8 +9,8 @@ const { COOKIE_SECRET } = process.env;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
-// app.use(express.static(path.join(__dirname, "./client", "dist")));
 app.use(cookieParser(COOKIE_SECRET));
+app.use(express.static(path.join(__dirname, "./client", "dist")));
 
 app.get("/health", (req, res) => {
   res.send("All healthy here!");
