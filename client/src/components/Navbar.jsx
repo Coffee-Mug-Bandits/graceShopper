@@ -25,7 +25,7 @@ export function Navbar() {
     <nav class="w-full sticky top-0 z-50">
       <div className="flex justify-around bg-yellow-900 h-12 items-center text-white">
         <h1 className="flex justify-center text-md font-mono font-extrabold">
-          Welcome to Legally Sold Coffee Mugs
+          Welcome to Heist Coffee
         </h1>
 
         {console.log(selectedUser)}
