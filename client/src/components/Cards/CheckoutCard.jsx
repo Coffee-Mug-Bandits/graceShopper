@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import useCart from "../../hooks/useCart";
+import useUsers from "../../hooks/useUsers";
 
 export default function CheckoutCard() {
   const navigate = useNavigate();
-  const { cart, deleteItem } = useCart();
+  const { cart, checkoutOrder } = useCart();
+  const { selectedUser } = useUsers();
   return (
     <div>
       <div class="py-16 px-4 md:px-6 2xl:px-0 flex justify-center items-center 2xl:mx-auto 2xl:container">
@@ -147,14 +149,13 @@ export default function CheckoutCard() {
                 />
               </div>
               <button
-                onClick={() => {
+                onClick={async () => {
                   navigate("/");
                   cart.totalAmount = 0;
-                  cart?.order_products?.map((op) => {
-                    deleteItem({
-                      order_id: op.order_id,
-                      product_id: op.product_id,
-                    });
+
+                  await checkoutOrder({
+                    order_id: cart.id,
+                    user_id: selectedUser.id,
                   });
                 }}
                 class="mt-8 border border-transparent hover:border-gray-300 dark:bg-white dark:hover:bg-yellow-200 dark:text-gray-900  dark:border-transparent bg-gray-900 hover:bg-white  hover:text-gray-900 flex justify-center items-center py-4 rounded w-full"

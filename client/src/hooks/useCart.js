@@ -24,6 +24,16 @@ export default function useCart() {
   const createOrderProduct = useStoreActions((actions) => {
     return actions.cart.createOrderProduct;
   });
+  const checkoutOrder = useStoreActions(
+    (actions) => actions.cart.checkoutOrder
+  );
 
-  return { cart, fetchCart, updateQty, deleteItem, createOrderProduct };
+  return {
+    cart,
+    fetchCart,
+    updateQty,
+    deleteItem,
+    createOrderProduct,
+    checkoutOrder,
+  };
 }
