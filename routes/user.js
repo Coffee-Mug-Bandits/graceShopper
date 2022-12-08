@@ -112,8 +112,11 @@ userRouter.get(
   "/me/cart",
   authRequired,
   asyncErrorHandler(async (req, res, next) => {
-    const cart = await prisma.Order.findUnique({
-      where: { user_id: req.user.id },
+    const cart = await prisma.Order.findFirst({
+      where: {
+        user_id: req.user.id,
+        is_cart: true,
+      },
       include: {
         order_products: {
           include: { products: true },
@@ -124,6 +127,25 @@ userRouter.get(
   })
 );
 // GET api/users/myOrders ??
+
+userRouter.get(
+  "/myOrders",
+  authRequired,
+  asyncErrorHandler(async (req, res, next) => {
+    const myOrders = await prisma.Order.findMany({
+      where: {
+        user_id: req.user.id,
+        is_cart: false,
+      },
+      include: {
+        order_products: {
+          include: { products: true },
+        },
+      },
+    });
+    res.send(myOrders);
+  })
+);
 
 userRouter.post("/logout", async (req, res, next) => {
   try {
