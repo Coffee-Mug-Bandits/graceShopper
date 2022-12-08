@@ -8,11 +8,12 @@ import AuthForm from "./components/AuthForm";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import Checkout from "./components/Checkout";
+import OrderHistory from "./components/OrderHistory";
 
 function App() {
   return (
-    <div className="min-h-full min-w-full">
-      <div className="App bg-gradient-to-t from-yellow-600 to-yellow-100">
+    <div className="">
+      <div className="App min-h- bg-gradient-to-t from-yellow-600 to-yellow-100">
         <Navbar />
         <Routes>
           <Route path="/" element={<Products />} />
@@ -20,6 +21,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/:method" element={<AuthForm />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/myOrders" element={<OrderHistory />} />
         </Routes>
         <Footer />
       </div>

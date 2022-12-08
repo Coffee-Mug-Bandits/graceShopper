@@ -128,6 +128,25 @@ userRouter.get(
 );
 // GET api/users/myOrders ??
 
+userRouter.get(
+  "/myOrders",
+  authRequired,
+  asyncErrorHandler(async (req, res, next) => {
+    const myOrders = await prisma.Order.findMany({
+      where: {
+        user_id: req.user.id,
+        is_cart: false,
+      },
+      include: {
+        order_products: {
+          include: { products: true },
+        },
+      },
+    });
+    res.send(myOrders);
+  })
+);
+
 userRouter.post("/logout", async (req, res, next) => {
   try {
     res.clearCookie("token", {

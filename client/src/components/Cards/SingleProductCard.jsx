@@ -18,7 +18,7 @@ export default function SingleProductCard({
       </h2>
       <div className="flex flex-row flex-wrap justify-around mt-24 bg-gradient-to-t from-yellow-900 to-yellow-600 items-center flex-row flex-wrap border-black border-x-2 border-y-2 h-96 w-screen rounded-md text-yellow-50">
         <img
-          className="h-80 border-black border-2 rounded-3xl"
+          className="h-80 border-amber-400 border-2 rounded-3xl "
           src={selectedProduct.imageUrl}
         />
         <div className="flex flex-col font-mono ">

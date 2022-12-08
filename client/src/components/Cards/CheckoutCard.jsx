@@ -151,7 +151,6 @@ export default function CheckoutCard() {
               <button
                 onClick={async () => {
                   navigate("/");
-                  cart.totalAmount = 0;
 
                   await checkoutOrder({
                     order_id: cart.id,
