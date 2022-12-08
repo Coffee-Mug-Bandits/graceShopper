@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export default function Products() {
-  const { createOrderProduct, cart } = useCart();
+  const { createOrderProduct, cart, fetchCart } = useCart();
   const { products, fetchProducts } = useProducts();
   const [error, setError] = useState();
   const { selectedUser } = useUsers();
@@ -16,6 +16,7 @@ export default function Products() {
   const [searchTerm, setSearchTerm] = useState("");
   useEffect(() => {
     fetchProducts();
+    fetchCart();
   }, []);
   console.log(selectedUser);
 
